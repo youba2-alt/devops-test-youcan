@@ -1,0 +1,14 @@
+from php:8.2.9RC1-fpm-alpine3.17
+
+RUN mkdir -p /tmp/stores
+
+VOLUME [ "/stores" ]
+
+RUN curl -sSL https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions -o - | sh -s  mbstring exif gd
+
+WORKDIR /app
+COPY ./index.php /app/index.php
+
+EXPOSE 8000
+ENTRYPOINT [ "php" ]
+CMD [ "-S", "0.0.0.0:8000", "-t", "/app" ]

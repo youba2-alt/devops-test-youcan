@@ -1,0 +1,15 @@
+version: '3'
+services:
+  php-app:
+    build: ./app/
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./stores:/stores
+  openresty:
+    image: openresty/openresty:alpine
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/usr/local/openresty/nginx/conf/nginx.conf
+      - ./images:/images
