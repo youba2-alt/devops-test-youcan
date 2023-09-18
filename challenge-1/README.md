@@ -52,4 +52,30 @@ Nginx doesn't support lua scripting so you can manipulate the coming request as 
 
 * Run ansible script : `sudo ansible-playbook ansible/main.yaml`. 
 * set domain name on Hosts file (127.0.0.1 example.com) 
+* available images that you can use to test, on the AWS bucket are : 
+
+```
+abc-store/image.jpg
+azx-store/image.png
+store-1/image.jpg
+store-2/image.jpg
+```
+
+So the links you'll be using will look like this (respectively, and adding size suffix[-sm, -md, -lg] ) :
+
+```
+http://example.com/stores/abc-store/categorie/image-lg.jpg 
+http://example.com/stores/azx-store/categorie/image-md.png 
+http://example.com/stores/store-1/categorie/image-sm.jpg 
+http://example.com/stores/store-2/categorie/image-lg.jpg 
+```
+
+---
+**NOTE**
+The images on the S3 bucket are just put in a way to make it work, it can be always something else.
+---
+
+## How does it work 
+
+<img src="assets/seq.png" width="800px" />
 
