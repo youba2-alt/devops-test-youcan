@@ -1,0 +1,4 @@
+- name: Start services if are not yet started
+  community.docker.docker_compose:
+    project_src: "./"
+    state: present

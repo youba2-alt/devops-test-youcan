@@ -1,0 +1,12 @@
+# these pip packages are required so community.docker can work
+- name: installing pip
+  ansible.builtin.apt:
+    name: python3-pip
+    state: present
+
+- name: install python packages docker & docker-compose
+  ansible.builtin.pip:
+    name:
+      - docker
+      - docker-compose
+# end

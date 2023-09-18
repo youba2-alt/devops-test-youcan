@@ -36,7 +36,20 @@ Nginx doesn't support lua scripting so you can manipulate the coming request as 
 
 ---
 
+## Requirements : 
+
+* having docker and docker compose installed
+* having ansible installed
+* having python3 
 
 
-supported images types : jpeg/jpg, png, bmp
+## Notes
+
+* supported images types : jpeg/jpg, png, bmp
+* in ansible `become: true`, is needed to install pip3, you can check that out for your case.
+
+## Usage
+
+* Run ansible script : `sudo ansible-playbook ansible/main.yaml`. 
+* set domain name on Hosts file (127.0.0.1 example.com) 
 
