@@ -82,7 +82,9 @@ http://example.com/stores/store-2/categorie/image-lg.jpg
 
 * The client sends a request to the openResty "CDN" (or reverse proxy ??) respecting the requested format `example.com/stores/XYZ20211008ABC/categorie/image-sm.png`
 
-* Using a Lua script i check if the image exists, if it is not, i sent an HTTP GET request to the `php-app` which will get the original uploaded image `stores/XYZ20211008ABC/categorie/image.png`, make diffrent sizes out of it. Then it stores the three sizes in a mounted directory `/stores`, and finally sends a 200-OK status code back to the Lua script.
+* Using a Lua script i check if the image exists, if it is not, i sent an HTTP GET request to the `php-app` which will get the original uploaded image `stores/XYZ20211008ABC/categorie/image.png` from s3 public bucket, generates diffrent sizes out of it. Then it stores the three sizes in a mounted directory `/stores`, and finally sends a 200-OK status code back to the Lua script.
+
+* The problematic of limited subdirectories in linux is treated in this step, as the three generated images are put into the path `/stores/XY/Z2/XYZ20211008ABC/categorie/`
 
 * The same directory `/stores` is also mounted to the OpenResty contaier, the lua script returns the image back to the client.
 
