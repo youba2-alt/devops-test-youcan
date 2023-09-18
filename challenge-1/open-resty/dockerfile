@@ -1,0 +1,6 @@
+FROM openresty/openresty:1.21.4.2-centos-rpm
+
+RUN opm get xiedacon/lua-fs-module
+RUN opm get ledgetech/lua-resty-http
+
+EXPOSE 80

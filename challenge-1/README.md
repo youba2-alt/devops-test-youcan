@@ -38,3 +38,5 @@ Nginx doesn't support lua scripting so you can manipulate the coming request as 
 
 
 
+supported images types : jpeg/jpg, png, bmp
+

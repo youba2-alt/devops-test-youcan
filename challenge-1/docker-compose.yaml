@@ -6,10 +6,12 @@ services:
       - "8000:8000"
     volumes:
       - ./stores:/stores
+    restart: always
   openresty:
-    image: openresty/openresty:alpine
+    build: ./open-resty/
+    restart: always
     ports:
       - "80:80"
     volumes:
-      - ./nginx.conf:/usr/local/openresty/nginx/conf/nginx.conf
-      - ./images:/images
+      - ./open-resty/nginx.conf:/usr/local/openresty/nginx/conf/nginx.conf
+      - ./stores:/stores
