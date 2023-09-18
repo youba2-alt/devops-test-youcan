@@ -38,15 +38,16 @@ Nginx doesn't support lua scripting so you can manipulate the coming request as 
 
 ## Requirements : 
 
-* having docker and docker compose installed
-* having ansible installed
-* having python3 
+* having docker and docker compose installed and the current user can use them.
+* having ansible installed.
+* having python3.
+* have sudo priviliges.
 
 
 ## Notes
 
-* supported images types : jpeg/jpg, png, bmp
-* in ansible `become: true`, is needed to install pip3, you can check that out for your case.
+* Supported images types : jpeg/jpg, png, bmp
+* In ansible, there is a [`become: true`](challenge-1\ansible\main.yaml), which is needed to install pip3, you can check that out by [👉clicking here](challenge-1\ansible\roles\install_packages\tasks\main.yaml).
 
 ## Usage
 
@@ -61,7 +62,7 @@ store-1/image.jpg
 store-2/image.jpg
 ```
 
-So the links you'll be using will look like this (respectively, and adding size suffix[-sm, -md, -lg] ) :
+So the links you'll be using will look like this (respectively, and after adding size suffixes [-sm, -md, -lg] ) :
 
 ```
 http://example.com/stores/abc-store/categorie/image-lg.jpg 
@@ -70,12 +71,23 @@ http://example.com/stores/store-1/categorie/image-sm.jpg
 http://example.com/stores/store-2/categorie/image-lg.jpg 
 ```
 
----
-**NOTE**
-The images on the S3 bucket are just put in a way to make it work, it can be always something else.
----
+
+    💡 The images on the S3 bucket are just put in a way to make it work, and to focus on the "CDN" part, it can be always done in another way.
 
 ## How does it work 
 
+<p align="center">
 <img src="assets/seq.png" width="800px" />
+</p>
 
+* The client sends a request to the openResty "CDN" (or reverse proxy ??) respecting the requested format `example.com/stores/XYZ20211008ABC/categorie/image-sm.png`
+
+* Using a Lua script i check if the image exists, if it is not, i sent an HTTP GET request to the `php-app` which will get the original uploaded image `stores/XYZ20211008ABC/categorie/image.png`, make diffrent sizes out of it. Then it stores the three sizes in a mounted directory `/stores`, and finally sends a 200-OK status code back to the Lua script.
+
+* The same directory `/stores` is also mounted to the OpenResty contaier, the lua script returns the image back to the client.
+
+* That's it 🦆
+
+
+
+?>
