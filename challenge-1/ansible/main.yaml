@@ -1,13 +1,7 @@
 - hosts: localhost
   name: "Deploying Challenge-1 solution"
   tasks:
-  - name: Create stores directory
-    ansible.builtin.import_role:
-      name: create_stores_dir
-  - name: install required packages
-    become: true
-    ansible.builtin.import_role:
-      name: install_packages
-  - name: Start docker compose deployment
-    ansible.builtin.import_role:
-      name: start_docker_compose
+    - name: Deploy challenge 1 role
+      become: true
+      ansible.builtin.import_role:
+        name: deploy_challenge_1

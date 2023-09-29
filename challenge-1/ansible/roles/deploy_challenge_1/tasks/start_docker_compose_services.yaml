@@ -1,0 +1,22 @@
+- name: Start docker compose services
+  community.docker.docker_compose:
+    project_name: challenge-1
+    definition:
+      version: '3'
+      services:
+        php-app:
+          build: "{{ playbook_dir }}/app"
+          volumes:
+            - "{{ playbook_dir }}/stores:/stores"
+          restart: always
+        openresty:
+          build: "{{ playbook_dir }}/openresty"
+          restart: always
+          ports:
+            - "80:80"
+          volumes:
+            - "{{ playbook_dir }}/openresty/conf.d/:/usr/local/openresty/nginx/conf/conf.d/"
+            - "{{ playbook_dir }}/openresty/nginx.conf:/usr/local/openresty/nginx/conf/nginx.conf"
+            - "{{ playbook_dir }}/stores:/stores"
+          depends_on:
+            - php-app

@@ -1,0 +1,4 @@
+- name: Create stores directory to store images
+  file:
+    path: "{{ playbook_dir }}/stores"
+    state: directory

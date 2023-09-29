@@ -1,0 +1,4 @@
+---
+- include_tasks: create_stores_dir.yaml
+- include_tasks: install_required_packages.yaml
+- include_tasks: start_docker_compose_services.yaml

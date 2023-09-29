@@ -1,4 +1,0 @@
-- name: Create stores dir to store images
-  file:
-    path: stores
-    state: directory
